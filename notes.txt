@@ -1,0 +1,8 @@
+
+look at what github is doing to render all the markup options
+https://github.com/github/markup
+https://github.com/vmg/redcarpet
+https://github.com/gettalong/kramdown
+
+http://support.markedapp.com/kb/how-to-tips-and-tricks/using-marked-with-github-flavored-markdown-and-syntax-highlighting
+https://gist.github.com/ralph/1300939

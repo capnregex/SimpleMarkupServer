@@ -1,0 +1,30 @@
+[Unit]
+Description=Puma <%= server_name %> HTTP Server
+After=network.target
+
+# Uncomment for socket activation (see below)
+Requires=<%= socket_name %>
+
+[Service]
+# Foreground process (do not use --daemon in ExecStart or config.rb)
+Type=simple
+
+SyslogIdentifier=<%= systemd_name %>
+
+# Preferably configure a non-privileged user
+User=<%= user %>
+Group=<%= group %>
+
+# Specify the path to your puma application root
+WorkingDirectory=<%= site_path %>
+
+# Helpful for debugging socket activation, etc.
+Environment=PUMA_DEBUG=1
+
+ExecStart=/bin/bash -l -c puma -C config/puma.rb
+
+Restart=no
+
+[Install]
+# WantedBy=multi-user.target
+

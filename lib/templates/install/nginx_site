@@ -1,0 +1,26 @@
+
+upstream <%= upstream %> {
+    # Path to Puma SOCK file, as defined previously
+    server unix://<%= socket_path %> fail_timeout=0;
+}
+
+server {
+    listen 80;
+    server_name <%= server_name %>;
+
+    root /srv<%= site_path %>/public;
+
+    try_files $uri $uri/index.html $uri.html @<%= upstream %>;
+
+    location @<%= upstream %> {
+        proxy_pass http://<%= upstream %>;
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+        proxy_set_header Host $http_host;
+        proxy_redirect off;
+    }
+
+    error_page 500 502 503 504 /500.html;
+    client_max_body_size 4G;
+    keepalive_timeout 10;
+}
+

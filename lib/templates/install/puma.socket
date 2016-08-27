@@ -1,0 +1,20 @@
+[Unit]
+Description=Puma <%= server_name %> HTTP Server Accept Sockets
+
+[Socket]
+# ListenStream=0.0.0.0:3000
+# ListenStream=0.0.0.0:9293
+
+# AF_UNIX domain socket
+SocketUser=<%= user %>
+SocketGroup=<%= group %>
+ListenStream=<%= socket_path %>
+
+# Socket options matching Puma defaults
+ReusePort=true
+Backlog=1024
+
+[Install]
+WantedBy=nginx.service
+
+
